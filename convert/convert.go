@@ -1,6 +1,7 @@
 package convert
 
 import (
+	"encoding/json"
 	"fmt"
 	"strconv"
 
@@ -43,4 +44,17 @@ func MustNormalizeFloat64(v float64, precision int) float64 {
 	}
 
 	return normalized
+}
+
+func InterfaceToStruct(in interface{}, out interface{}) error {
+	buf, err := json.Marshal(in)
+	if err != nil {
+		return errors.Wrap(err, "Marshal")
+	}
+
+	if err := json.Unmarshal(buf, out); err != nil {
+		return errors.Wrap(err, "Unmarshal")
+	}
+
+	return nil
 }
