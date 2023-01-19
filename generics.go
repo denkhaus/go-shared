@@ -87,3 +87,13 @@ func (p *Normalizer[T]) Update(v T) {
 func (p *Normalizer[T]) Get(v T) T {
 	return (v - p.minValue) / (p.maxValue - p.minValue)
 }
+
+func OneOf[T comparable](value T, coll ...T) bool {
+	for _, val := range coll {
+		if val == value {
+			return true
+		}
+	}
+
+	return false
+}
