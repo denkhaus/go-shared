@@ -3,6 +3,7 @@ package shared
 import (
 	"sort"
 
+	"github.com/denkhaus/containers"
 	"golang.org/x/exp/constraints"
 )
 
@@ -73,30 +74,26 @@ func Reduce[E any](s []E, init E, f reduceFunc[E]) E {
 	return cur
 }
 
-func Min[T constraints.Ordered](x, y T) T {
-	if x < y {
-		return x
-	}
-	return y
-}
-
-func Max[T constraints.Ordered](x, y T) T {
-	if x > y {
-		return x
-	}
-	return y
-}
-
 type Normalizer[T Number] struct {
 	minValue T
 	maxValue T
 }
 
 func (p *Normalizer[T]) Update(v T) {
-	p.minValue = Min(p.minValue, v)
-	p.maxValue = Max(p.maxValue, v)
+	p.minValue = containers.Min(p.minValue, v)
+	p.maxValue = containers.Max(p.maxValue, v)
 }
 
 func (p *Normalizer[T]) Get(v T) T {
 	return (v - p.minValue) / (p.maxValue - p.minValue)
+}
+
+func OneOf[T comparable](value T, coll ...T) bool {
+	for _, val := range coll {
+		if val == value {
+			return true
+		}
+	}
+
+	return false
 }
