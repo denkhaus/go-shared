@@ -6,6 +6,7 @@ import (
 	"strconv"
 
 	"github.com/pkg/errors"
+	"github.com/spf13/cast"
 )
 
 func MustStringToFloat64(val string) float64 {
@@ -47,6 +48,14 @@ func MustNormalizeFloat64(v float64, precision int) float64 {
 }
 
 func InterfaceToStruct(in interface{}, out interface{}) error {
+	if vString, ok := in.(string); ok {
+		m, err := cast.ToStringMapE(vString)
+		if err != nil {
+			return errors.Wrap(err, "ToStringMapE")
+		}
+		in = m
+	}
+
 	buf, err := json.Marshal(in)
 	if err != nil {
 		return errors.Wrap(err, "Marshal")
