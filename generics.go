@@ -22,14 +22,24 @@ func Sort[E constraints.Ordered](s []E) []E {
 	return result
 }
 
-type mapFunc[E any] func(E) E
+type mapFunc1[E any] func(E) E
 
-func Map[E any](s []E, f mapFunc[E]) []E {
+func Map[E any](s []E, f mapFunc1[E]) []E {
 	result := make([]E, len(s))
 	for i := range s {
 		result[i] = f(s[i])
 	}
 	return result
+}
+
+type mapFunc2[T1, T2 any] func(T1) T2
+
+func Map2[T1, T2 any](s []T1, f mapFunc2[T1, T2]) []T2 {
+	r := make([]T2, len(s))
+	for i, v := range s {
+		r[i] = f(v)
+	}
+	return r
 }
 
 type forEachFunc[E any] func(E) error
