@@ -107,3 +107,12 @@ func OneOf[T comparable](value T, coll ...T) bool {
 
 	return false
 }
+
+// Defaultify returns defaultValue if v is equal to its default value.
+func Defaultify[T comparable](v T, defaultValue T) T {
+	var def T
+	if v == def {
+		return defaultValue
+	}
+	return v
+}
