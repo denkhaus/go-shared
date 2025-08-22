@@ -1,13 +1,15 @@
 module github.com/denkhaus/go-shared
 
-go 1.22
+go 1.23
 
 require (
-	github.com/fatih/color v1.13.0
+	github.com/denkhaus/containers v0.0.0-20250610153347-e36cd5aa23d7
+	github.com/fatih/color v1.17.0
 	github.com/pkg/errors v0.9.1
 	github.com/sbabiv/roundrobin v0.0.0-20180428125943-85f671680a31
+	github.com/spf13/cast v1.9.2
 	go.temporal.io/sdk v1.18.1
-	golang.org/x/sync v0.1.0
+	golang.org/x/sync v0.16.0
 	gopkg.in/pipe.v2 v2.0.0-20140414041502-3c2ca4d52544
 	logur.dev/logur v0.17.0
 )
@@ -17,7 +19,7 @@ require github.com/benbjohnson/clock v1.3.0 // indirect
 require (
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.16 // indirect
-	golang.org/x/exp v0.0.0-20220929160808-de9c53c655b9
+	golang.org/x/exp v0.0.0-20250506013437-ce4c2cf36ca6
 )
 
 require (
